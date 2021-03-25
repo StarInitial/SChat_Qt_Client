@@ -19,6 +19,8 @@ Session::Session(QWidget *parent)
     /* 加载Web框架资源 */
     QFileInfo *index = new QFileInfo("./html/index.html");
     ui->WebDisplay->setUrl(QUrl("file:///"+index->absoluteFilePath()));
+
+    ui->WebDisplay->page()->settings()->setAttribute(QWebEngineSettings::ShowScrollBars,false);
 //    qputenv("QTWEBENGINE_REMOTE_DEBUGGING", "9223");
 //    qDebug()<<"file:///"+index->absoluteFilePath();
 
@@ -280,4 +282,8 @@ void Session::on_actionempty_triggered()
 void Session::on_actionabout_triggered()
 {
     //关于 "SChat"
+    About *h=new About();
+    //阻塞其他页面，防止多个关于界面
+    h->setWindowModality(Qt::ApplicationModal);
+    h->show();
 }

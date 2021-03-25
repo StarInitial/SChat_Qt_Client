@@ -13,6 +13,7 @@
 #include <QWebSocket>
 #include <QJsonArray>
 #include <QListWidgetItem>
+#include <QWebEngineSettings>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Session; }

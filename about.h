@@ -2,6 +2,7 @@
 #define ABOUT_H
 
 #include <QWidget>
+#include <QMouseEvent>
 
 namespace Ui {
 class About;
@@ -16,7 +17,11 @@ public:
     ~About();
 
 private:
+    QPoint m_mousePressPoint;
     Ui::About *ui;
+    void mousePressEvent(QMouseEvent* event);
+    void mouseMoveEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
 };
 
 #endif // ABOUT_H
