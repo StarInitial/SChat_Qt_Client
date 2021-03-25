@@ -5,6 +5,7 @@
 
 #include "bridge.h"
 #include "join.h"
+#include "about.h"
 #include "userinfo.h"
 #include <QFileInfo>
 #include <QCloseEvent>
@@ -71,6 +72,8 @@ private slots:
     void socketConnected();
     void socketDisconnected();
     void socketTextMessageReceived(QString message);
+
+    void on_actionabout_triggered();
 
 private:
     Ui::Session *ui;

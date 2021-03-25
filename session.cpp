@@ -276,3 +276,8 @@ void Session::on_actionempty_triggered()
         ui->WebDisplay->page()->runJavaScript("empty()");
     }
 }
+
+void Session::on_actionabout_triggered()
+{
+    //关于 "SChat"
+}
