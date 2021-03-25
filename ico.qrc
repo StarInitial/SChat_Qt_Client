@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/ico">
+        <file alias="unknown">html/unknown.jpg</file>
+        <file alias="schat">schat.ico</file>
+        <file alias="schat_back">SChat_back.png</file>
+    </qresource>
+</RCC>

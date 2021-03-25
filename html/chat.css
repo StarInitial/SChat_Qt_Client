@@ -1,0 +1,205 @@
+@import url('./family.css');
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-size: large;
+}
+*{
+    cursor:default;
+}
+
+*::selection{
+    background: none;
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    min-width: 600px;
+}
+aside,
+ #main {
+     flex-grow: 1;
+     height: 100%;
+     min-width: 300px;
+ }
+aside {
+    background-color: #2F373F;
+}
+#main {
+    background-color: #E7EDED;
+}
+.avatar {
+    margin-bottom: -5px;
+    margin-right: -10px;
+}
+.avatar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+.color {
+    background-color: #4AD99B;
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+    position: relative;
+    top: -16px;
+    right: -32px;
+    border: 2px solid #343E48;
+}
+.away {
+    background-color: #FA676A;
+}
+.main_li {
+    flex-grow: 2;
+}
+.selected {
+    border-bottom: 2px solid #fff;
+}
+.username {
+    margin-top: 5px;
+}
+.text {
+    font-size: 0.7em;
+}
+.time {
+    font-size: 0.6em;
+    flex-grow: 0.3;
+    margin-top: 10px;
+}
+#main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+#main footer {
+    background-color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+#main footer textarea {
+    color: #c0c0c0;
+    font-size: large;
+    cursor: auto;
+    flex-grow: 2;
+    margin: 0 10px;
+    resize: none;
+    border: none;
+    padding-top: 5px;
+    height: 20px;
+}
+#main footer textarea::selection{
+    color: white;
+    background: #3fbcf2;
+}
+#main footer textarea:focus {
+    color: #2f2f2f;
+    outline: none;
+}
+#main footer i {
+    color: #c0c0c0;
+    cursor: pointer;
+    cursor: hand;
+}
+#messages {
+    overflow: auto;
+    flex-grow: 2;
+    padding: 10px;
+}
+#messages article {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+#messages article .avatar {
+    margin-right: 10px;
+}
+#messages .right .avatar {
+    margin-right: 0;
+}
+.msg {
+    display: flex;
+    justify-content: space-between;
+}
+.msg .tri {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 10px 15px 0;
+    border-color: transparent #ffffff transparent transparent;
+}
+.msg_inner {
+    background-color: #fff;
+    width: 100%;
+    padding: 15px 10px;
+    border-radius: 0 4px 4px 4px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+.right {
+    flex-direction: row-reverse;
+}
+.right .msg {
+    flex-direction: row-reverse;
+}
+.right .msg .tri {
+    width: 0;
+    height: 0;
+    min-height: 25px;
+    border-style: solid;
+    border-width: 15px 10px 0 0;
+    border-color: #3fbcf2 transparent transparent transparent;
+}
+.right .msg .msg_inner {
+    border-radius: 4px 0 4px 4px;
+    box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: right;
+    color: white;
+    background-color: #3fbcf2;
+}
+#credits {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+#credits img {
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+}
+#credits span {
+    display: block;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    user-select: none;
+}
+
+
+
+.chat-notice{
+    clear: both;
+    font-size: medium;
+    color: white;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.chat-notice span{
+    background-color: #cecece;
+    border-radius: 5px;
+    padding: 5px 10px;
+}

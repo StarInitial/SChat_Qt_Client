@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script src="./jquery-1.12.4.min.js"></script>
+<script src="./qwebchannel.js"></script>
+<link href="./icon.css" rel="stylesheet">
+<link href="./chat.css" rel="stylesheet">
+<link rel="stylesheet" href="./jquery.contextMenu.min.css">
+<script src="./jquery.contextMenu.min.js"></script>
+<script src="./jquery.ui.position.js"></script>
+
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css">-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>-->
+
+<section id="container" >
+    <section id="main">
+        <section id="messages" onContextMenu="return false">
+        </section>
+		<footer>
+            <i class="material-icons" id="file">attach_file</i>
+            <textarea placeholder="输入消息..." id="message"></textarea>
+            <i class="material-icons" id="send">send</i>
+        </footer>
+    </section>
+</section>
+
+<script src="./talk.js" type="application/javascript"></script>
+</body>
+</html>
