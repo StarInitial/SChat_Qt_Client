@@ -11,6 +11,7 @@ Join::Join(QWidget *parent) :
     AVATAR = "";
     TIME_OUT_SECOUND = 30000;
     SERVER_URL = "ws://123.56.105.26:6060/chat-ws";
+
 //    SERVER_URL = "wss://hack.chat/chat-ws";
 
 
