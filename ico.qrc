@@ -3,5 +3,6 @@
         <file alias="unknown">html/unknown.jpg</file>
         <file alias="schat">schat.ico</file>
         <file alias="schat_back">SChat_back.png</file>
+        <file alias="setting_title">icon/setting_title.png</file>
     </qresource>
 </RCC>

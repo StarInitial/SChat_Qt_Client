@@ -7,6 +7,7 @@ About::About(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowFlags(Qt::FramelessWindowHint|Qt::WindowStaysOnTopHint);
+    this->setWindowModality(Qt::ApplicationModal);
 }
 
 About::~About()

@@ -22,6 +22,7 @@ SOURCES += \
     join.cpp \
     main.cpp \
     session.cpp \
+    setting.cpp \
     userinfo.cpp
 
 HEADERS += \
@@ -29,12 +30,14 @@ HEADERS += \
     bridge.h \
     join.h \
     session.h \
+    setting.h \
     userinfo.h
 
 FORMS += \
     about.ui \
     join.ui \
     session.ui \
+    setting.ui \
     userinfo.ui
 
 TRANSLATIONS += \

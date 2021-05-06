@@ -106,7 +106,7 @@
     <string>基于WebSocket协议，免费简洁的聊天应用程序。
 可配置的服务端:
 - HackChat
-- SChatServer
+- SChat(Server)
 
 支持完全自定义的服务配置。</string>
    </property>
@@ -159,7 +159,7 @@ background-color: rgb(255, 255, 255, 200);
     <string notr="true">color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
-    <string>Version:1.0.0 HackChat测试版</string>
+    <string>Version:1.0.0 测试版</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>

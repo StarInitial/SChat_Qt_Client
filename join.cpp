@@ -7,7 +7,7 @@ Join::Join(QWidget *parent) :
     ui(new Ui::Join)
 {
     //预定义参数设置
-    DEBUG_MODEL = false;
+    DEBUG_MODEL = true;
     AVATAR = "";
     TIME_OUT_SECOUND = 30000;
     SERVER_URL = "ws://123.56.105.26:6060/chat-ws";
