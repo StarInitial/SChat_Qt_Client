@@ -3,6 +3,12 @@
         <file alias="unknown">html/unknown.jpg</file>
         <file alias="schat">schat.ico</file>
         <file alias="schat_back">SChat_back.png</file>
-        <file alias="setting_title">icon/setting_title.png</file>
+        <file alias="color_check_in">img/icon/color_check_in.png</file>
+    </qresource>
+    <qresource prefix="/title">
+        <file alias="setting_title">img/title/setting_title.png</file>
+        <file alias="setting_title_black">img/title/setting_title_black.png</file>
+        <file alias="setting_title_darkblue">img/title/setting_title_darkblue.png</file>
+        <file alias="setting_title_pink">img/title/setting_title_pink.png</file>
     </qresource>
 </RCC>

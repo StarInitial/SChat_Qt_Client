@@ -45,7 +45,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-image: url(:/ico/setting_title);</string>
+    <string notr="true">border-image: url(:/title/setting_title);</string>
    </property>
    <property name="text">
     <string/>
@@ -86,9 +86,9 @@ background-color: rgb(225, 225, 225, 200);
   <widget class="QTabWidget" name="tabWidget">
    <property name="geometry">
     <rect>
-     <x>140</x>
+     <x>150</x>
      <y>100</y>
-     <width>621</width>
+     <width>631</width>
      <height>421</height>
     </rect>
    </property>
@@ -138,7 +138,7 @@ background-color: rgb(225, 225, 225, 200);
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>80</y>
+       <y>70</y>
        <width>471</width>
        <height>40</height>
       </rect>
@@ -184,7 +184,7 @@ border-bottom: 2px solid rgb(63, 188, 242);
      <property name="geometry">
       <rect>
        <x>500</x>
-       <y>80</y>
+       <y>70</y>
        <width>91</width>
        <height>40</height>
       </rect>
@@ -282,7 +282,7 @@ border-bottom: 2px solid rgb(63, 188, 242);
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>30</y>
+       <y>20</y>
        <width>120</width>
        <height>33</height>
       </rect>
@@ -303,31 +303,34 @@ border-bottom: 2px solid rgb(63, 188, 242);
       <string>服务后端：</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="server_ip_2">
+    <widget class="QWidget" name="auth_widget" native="true">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>260</y>
-       <width>571</width>
-       <height>40</height>
+       <x>10</x>
+       <y>220</y>
+       <width>581</width>
+       <height>161</height>
       </rect>
      </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>40</height>
-      </size>
-     </property>
-     <property name="font">
-      <font>
-       <family>Microsoft JhengHei</family>
-       <pointsize>14</pointsize>
-       <weight>50</weight>
-       <bold>false</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLineEdit{
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="1" column="0" colspan="2">
+       <widget class="QLineEdit" name="server_auth_key">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft JhengHei</family>
+          <pointsize>14</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLineEdit{
 background-color: rgb(255, 255, 255,0);
 	color: rgb(0, 0, 0);
 outline: none;
@@ -341,39 +344,33 @@ border-bottom: 2px solid rgb(20, 20, 20);
 QLineEdit:focus{
 border-bottom: 2px solid rgb(63, 188, 242);
 }</string>
-     </property>
-     <property name="text">
-      <string>[不使用密钥]</string>
-     </property>
-     <property name="placeholderText">
-      <string>服务认证密钥</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="server_ip_3">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>320</y>
-       <width>471</width>
-       <height>40</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>40</height>
-      </size>
-     </property>
-     <property name="font">
-      <font>
-       <family>Microsoft JhengHei</family>
-       <pointsize>14</pointsize>
-       <weight>50</weight>
-       <bold>false</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLineEdit{
+        </property>
+        <property name="text">
+         <string>[不使用密钥]</string>
+        </property>
+        <property name="placeholderText">
+         <string>服务认证密钥</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLineEdit" name="server_auth_c">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft JhengHei</family>
+          <pointsize>14</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLineEdit{
 background-color: rgb(255, 255, 255,0);
 	color: rgb(0, 0, 0);
 outline: none;
@@ -387,34 +384,53 @@ border-bottom: 2px solid rgb(20, 20, 20);
 QLineEdit:focus{
 border-bottom: 2px solid rgb(63, 188, 242);
 }</string>
-     </property>
-     <property name="text">
-      <string>[不使用证书]</string>
-     </property>
-     <property name="readOnly">
-      <bool>true</bool>
-     </property>
-     <property name="placeholderText">
-      <string>服务认证证书</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="change_path_3">
-     <property name="geometry">
-      <rect>
-       <x>500</x>
-       <y>320</y>
-       <width>93</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Microsoft YaHei</family>
-       <pointsize>12</pointsize>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton{
+        </property>
+        <property name="text">
+         <string>[不使用证书]</string>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+        <property name="placeholderText">
+         <string>服务认证证书</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_15">
+        <property name="maximumSize">
+         <size>
+          <width>120</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft JhengHei</family>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>服务认证：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="change_path_3">
+        <property name="minimumSize">
+         <size>
+          <width>93</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
 background-color: rgba(225, 225, 225, 0);
 color: rgb(63, 188, 242);
 border:0;
@@ -425,35 +441,13 @@ background-color: rgb(225, 225, 225, 100);
 QPushButton:pressed{
 background-color: rgb(225, 225, 225, 200);
 }</string>
-     </property>
-     <property name="text">
-      <string>变更</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_15">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>220</y>
-       <width>120</width>
-       <height>33</height>
-      </rect>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>120</width>
-       <height>16777215</height>
-      </size>
-     </property>
-     <property name="font">
-      <font>
-       <family>Microsoft JhengHei</family>
-       <pointsize>14</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>服务认证：</string>
-     </property>
+        </property>
+        <property name="text">
+         <string>变更</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </widget>
    <widget class="QWidget" name="chat">
@@ -489,7 +483,7 @@ color: rgb(255, 255, 255);
 background-color: rgb(63, 188, 242);</string>
         </property>
         <property name="text">
-         <string>   希望带它回家的那个人，是你。   </string>
+         <string>   希望带它回家的那个人,是你   </string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -590,7 +584,7 @@ background-color: rgb(255, 255, 255);</string>
       <number>6</number>
      </property>
      <property name="maximum">
-      <number>25</number>
+      <number>18</number>
      </property>
      <property name="singleStep">
       <number>2</number>
@@ -639,9 +633,9 @@ background-color: rgb(255, 255, 255);</string>
     <widget class="QLabel" name="label_8">
      <property name="geometry">
       <rect>
-       <x>550</x>
+       <x>560</x>
        <y>270</y>
-       <width>41</width>
+       <width>31</width>
        <height>41</height>
       </rect>
      </property>
@@ -654,7 +648,7 @@ background-color: rgb(255, 255, 255);</string>
      <property name="font">
       <font>
        <family>Microsoft JhengHei</family>
-       <pointsize>25</pointsize>
+       <pointsize>18</pointsize>
       </font>
      </property>
      <property name="text">
@@ -743,6 +737,9 @@ border-bottom: 2px solid rgb(20, 20, 20);
 QFontComboBox:focus{
 border-bottom: 2px solid rgb(63, 188, 242);
 }</string>
+     </property>
+     <property name="editable">
+      <bool>false</bool>
      </property>
      <property name="currentText">
       <string>微软雅黑</string>
@@ -956,76 +953,26 @@ border-bottom: 2px solid rgb(63, 188, 242);
       </item>
      </layout>
     </widget>
-    <widget class="QCheckBox" name="encryption_plus">
+    <widget class="QWidget" name="auth_widget_2" native="true">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>270</y>
-       <width>551</width>
-       <height>31</height>
+       <x>10</x>
+       <y>260</y>
+       <width>581</width>
+       <height>131</height>
       </rect>
      </property>
-     <property name="font">
-      <font>
-       <family>Microsoft JhengHei</family>
-       <pointsize>14</pointsize>
-       <weight>50</weight>
-       <bold>false</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>启用&quot;自定义的加密方案&quot;</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="encryption_plus_config">
-     <property name="geometry">
-      <rect>
-       <x>430</x>
-       <y>330</y>
-       <width>161</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Microsoft YaHei</family>
-       <pointsize>12</pointsize>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton{
-background-color: rgba(225, 225, 225, 0);
-color: rgb(63, 188, 242);
-border:0;
-}
-QPushButton:hover{
-background-color: rgb(225, 225, 225, 100);
-}
-QPushButton:pressed{
-background-color: rgb(225, 225, 225, 200);
-}</string>
-     </property>
-     <property name="text">
-      <string>配置加密方案</string>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="style_combo_2">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>330</y>
-       <width>391</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Microsoft JhengHei</family>
-       <pointsize>14</pointsize>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QComboBox{
+     <layout class="QGridLayout" name="gridLayout_7">
+      <item row="1" column="0">
+       <widget class="QComboBox" name="style_combo_2">
+        <property name="font">
+         <font>
+          <family>Microsoft JhengHei</family>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QComboBox{
 background-color: rgb(255, 255, 255,0);
 	color: rgb(0, 0, 0);
 outline: none;
@@ -1039,7 +986,57 @@ border-bottom: 2px solid rgb(20, 20, 20);
 QComboBox:focus{
 border-bottom: 2px solid rgb(63, 188, 242);
 }</string>
-     </property>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="encryption_plus_config">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+background-color: rgba(225, 225, 225, 0);
+color: rgb(63, 188, 242);
+border:0;
+}
+QPushButton:hover{
+background-color: rgb(225, 225, 225, 100);
+}
+QPushButton:pressed{
+background-color: rgb(225, 225, 225, 200);
+}</string>
+        </property>
+        <property name="text">
+         <string>配置加密方案</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" colspan="2">
+       <widget class="QCheckBox" name="encryption_plus">
+        <property name="font">
+         <font>
+          <family>Microsoft JhengHei</family>
+          <pointsize>14</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>启用&quot;自定义的加密方案&quot;</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </widget>
    <widget class="QWidget" name="style">
@@ -1144,7 +1141,7 @@ background-color: rgb(0, 0, 0);</string>
         </property>
         <property name="styleSheet">
          <string notr="true">border-radius: 25px;
-background-color: rgb(251, 114, 153)</string>
+background-color: rgb(251, 114, 153);</string>
         </property>
         <property name="text">
          <string/>
@@ -1174,10 +1171,11 @@ background-color: rgb(251, 114, 153)</string>
         </property>
         <property name="styleSheet">
          <string notr="true">border-radius: 25px;
-background-color: rgb(63, 188, 242);</string>
+background-color: rgb(63, 188, 242);
+border-image: url(:/ico/color_check_in);</string>
         </property>
         <property name="text">
-         <string>选中</string>
+         <string/>
         </property>
        </widget>
       </item>
@@ -1279,7 +1277,7 @@ border-bottom: 2px solid rgb(63, 188, 242);
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>280</y>
+       <y>320</y>
        <width>181</width>
        <height>33</height>
       </rect>
@@ -1304,7 +1302,7 @@ border-bottom: 2px solid rgb(63, 188, 242);
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>330</y>
+       <y>350</y>
        <width>471</width>
        <height>40</height>
       </rect>
@@ -1353,7 +1351,7 @@ border-bottom: 2px solid rgb(63, 188, 242);
      <property name="geometry">
       <rect>
        <x>500</x>
-       <y>330</y>
+       <y>350</y>
        <width>93</width>
        <height>41</height>
       </rect>
@@ -1381,6 +1379,25 @@ background-color: rgb(225, 225, 225, 200);
       <string>变更</string>
      </property>
     </widget>
+    <widget class="QCheckBox" name="checkBox">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>280</y>
+       <width>571</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft JhengHei</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>系统主题色配置优先</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="about">
     <attribute name="title">
@@ -1397,7 +1414,7 @@ background-color: rgb(225, 225, 225, 200);
      </property>
      <layout class="QGridLayout" name="gridLayout_6">
       <item row="0" column="1">
-       <widget class="QPushButton" name="ok_2">
+       <widget class="QPushButton" name="about_btn_1">
         <property name="font">
          <font>
           <family>Microsoft YaHei</family>
@@ -1461,7 +1478,7 @@ background-color: rgb(225, 225, 225, 200);
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QPushButton" name="ok_4">
+       <widget class="QPushButton" name="about_btn_3">
         <property name="font">
          <font>
           <family>Microsoft YaHei</family>
@@ -1487,7 +1504,7 @@ background-color: rgb(225, 225, 225, 200);
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QPushButton" name="ok_3">
+       <widget class="QPushButton" name="about_btn_2">
         <property name="font">
          <font>
           <family>Microsoft YaHei</family>
@@ -1527,7 +1544,7 @@ background-color: rgb(225, 225, 225, 200);
          </font>
         </property>
         <property name="text">
-         <string>在线帮助：</string>
+         <string>帮助：</string>
         </property>
        </widget>
       </item>
@@ -1577,7 +1594,7 @@ background-color: rgb(225, 225, 225, 200);
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>100</y>
+       <y>90</y>
        <width>591</width>
        <height>71</height>
       </rect>
@@ -1585,7 +1602,7 @@ background-color: rgb(225, 225, 225, 200);
      <property name="font">
       <font>
        <family>Microsoft YaHei UI</family>
-       <pointsize>30</pointsize>
+       <pointsize>40</pointsize>
        <weight>75</weight>
        <bold>true</bold>
       </font>
@@ -1622,26 +1639,47 @@ background-color: rgb(255, 255, 255,0);</string>
     <zorder>app</zorder>
    </widget>
   </widget>
-  <widget class="QPushButton" name="server_btn">
+  <widget class="QWidget" name="main_menu" native="true">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>100</y>
-     <width>120</width>
-     <height>50</height>
+     <width>130</width>
+     <height>300</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <family>Microsoft YaHei</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::RightToLeft</enum>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QPushButton{
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QPushButton" name="server_btn">
+      <property name="minimumSize">
+       <size>
+        <width>120</width>
+        <height>50</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Microsoft YaHei</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::RightToLeft</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
 background-color: rgba(225, 225, 225, 0);
 color: rgb(63, 188, 242);
 border:0;
@@ -1652,31 +1690,31 @@ background-color: rgb(225, 225, 225, 100);
 QPushButton:pressed{
 background-color: rgb(225, 225, 225, 200);
 }</string>
-   </property>
-   <property name="text">
-    <string>服务器设置</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="chat_btn">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>150</y>
-     <width>120</width>
-     <height>50</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Microsoft YaHei</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::LeftToRight</enum>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QPushButton{
+      </property>
+      <property name="text">
+       <string>服务器设置</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="chat_btn">
+      <property name="minimumSize">
+       <size>
+        <width>120</width>
+        <height>50</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Microsoft YaHei</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
 background-color: rgba(225, 225, 225, 0);
 color: rgb(63, 188, 242);
 border:0;
@@ -1687,31 +1725,31 @@ background-color: rgb(225, 225, 225, 100);
 QPushButton:pressed{
 background-color: rgb(225, 225, 225, 200);
 }</string>
-   </property>
-   <property name="text">
-    <string>聊天设置</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="safe_btn">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>200</y>
-     <width>120</width>
-     <height>50</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Microsoft YaHei</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::LeftToRight</enum>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QPushButton{
+      </property>
+      <property name="text">
+       <string>聊天设置</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="safe_btn">
+      <property name="minimumSize">
+       <size>
+        <width>120</width>
+        <height>50</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Microsoft YaHei</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
 background-color: rgba(225, 225, 225, 0);
 color: rgb(63, 188, 242);
 border:0;
@@ -1722,31 +1760,31 @@ background-color: rgb(225, 225, 225, 100);
 QPushButton:pressed{
 background-color: rgb(225, 225, 225, 200);
 }</string>
-   </property>
-   <property name="text">
-    <string>隐私和安全</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="style_btn">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>250</y>
-     <width>120</width>
-     <height>50</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Microsoft YaHei</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::LeftToRight</enum>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QPushButton{
+      </property>
+      <property name="text">
+       <string>隐私和安全</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="style_btn">
+      <property name="minimumSize">
+       <size>
+        <width>120</width>
+        <height>50</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Microsoft YaHei</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
 background-color: rgba(225, 225, 225, 0);
 color: rgb(63, 188, 242);
 border:0;
@@ -1757,31 +1795,31 @@ background-color: rgb(225, 225, 225, 100);
 QPushButton:pressed{
 background-color: rgb(225, 225, 225, 200);
 }</string>
-   </property>
-   <property name="text">
-    <string>主题</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="about_btn">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>300</y>
-     <width>120</width>
-     <height>50</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Microsoft YaHei</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::LeftToRight</enum>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QPushButton{
+      </property>
+      <property name="text">
+       <string>主题</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="about_btn">
+      <property name="minimumSize">
+       <size>
+        <width>120</width>
+        <height>50</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Microsoft YaHei</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
 background-color: rgba(225, 225, 225, 0);
 color: rgb(63, 188, 242);
 border:0;
@@ -1792,10 +1830,13 @@ background-color: rgb(225, 225, 225, 100);
 QPushButton:pressed{
 background-color: rgb(225, 225, 225, 200);
 }</string>
-   </property>
-   <property name="text">
-    <string>帮助</string>
-   </property>
+      </property>
+      <property name="text">
+       <string>帮助</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>

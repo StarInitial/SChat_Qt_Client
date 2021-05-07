@@ -19,6 +19,13 @@ public:
     void setPage(int page);
     void clearColor();
 
+    void initUI();
+
+
+private:
+    int inSize(int size,int min,int max,int defaultSize);
+    void loadStyleColor(int r,int g,int b);
+
 private slots:
     void on_server_btn_clicked();
 
@@ -44,9 +51,13 @@ private slots:
 
     void on_c_3_clicked();
 
-    void on_ok_2_clicked();
-
     void on_ok_clicked();
+
+    void on_about_btn_1_clicked();
+
+    void on_radioButton_2_clicked(bool checked);
+
+    void on_radioButton_clicked(bool checked);
 
 private:
     Ui::Setting *ui;

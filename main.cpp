@@ -7,8 +7,8 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    Join w;
-    //Setting w;
+    //Join w;
+    Setting w;
     w.show();
     return a.exec();
 }
