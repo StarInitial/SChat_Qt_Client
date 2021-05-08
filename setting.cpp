@@ -96,6 +96,7 @@ void Setting::loadStyleColor(int r, int g, int b)
     ui->chat_btn->setStyleSheet(style_btn.replace(style_clor_name,colorRgbName));
     ui->safe_btn->setStyleSheet(style_btn.replace(style_clor_name,colorRgbName));
     ui->style_btn->setStyleSheet(style_btn.replace(style_clor_name,colorRgbName));
+    ui->system_btn->setStyleSheet(style_btn.replace(style_clor_name,colorRgbName));
     ui->ok->setStyleSheet(style_btn.replace(style_clor_name,colorRgbName));
     ui->change_path_3->setStyleSheet(style_btn.replace(style_clor_name,colorRgbName));
     ui->encryption_plus_config->setStyleSheet(style_btn.replace(style_clor_name,colorRgbName));
@@ -146,9 +147,14 @@ void Setting::on_style_btn_clicked()
     setPage(3);
 }
 
-void Setting::on_about_btn_clicked()
+void Setting::on_system_btn_clicked()
 {
     setPage(4);
+}
+
+void Setting::on_about_btn_clicked()
+{
+    setPage(5);
 }
 
 void Setting::on_is_lock_stateChanged(int arg1)

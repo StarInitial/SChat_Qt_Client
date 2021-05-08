@@ -97,6 +97,9 @@ background-color: rgb(225, 225, 225, 200);
      <family>Microsoft JhengHei</family>
     </font>
    </property>
+   <property name="cursor">
+    <cursorShape>ArrowCursor</cursorShape>
+   </property>
    <property name="layoutDirection">
     <enum>Qt::LeftToRight</enum>
    </property>
@@ -110,7 +113,7 @@ background-color: rgb(225, 225, 225, 200);
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>5</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideNone</enum>
@@ -1512,6 +1515,11 @@ background-color: rgb(225, 225, 225, 200);
      </property>
     </widget>
    </widget>
+   <widget class="QWidget" name="tab">
+    <attribute name="title">
+     <string>system</string>
+    </attribute>
+   </widget>
    <widget class="QWidget" name="about">
     <attribute name="title">
      <string>帮助</string>
@@ -1911,6 +1919,41 @@ background-color: rgb(225, 225, 225, 200);
       </property>
       <property name="text">
        <string>主题</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="system_btn">
+      <property name="minimumSize">
+       <size>
+        <width>120</width>
+        <height>50</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Microsoft YaHei</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+background-color: rgba(225, 225, 225, 0);
+color: rgb(63, 188, 242);
+border:0;
+}
+QPushButton:hover{
+background-color: rgb(225, 225, 225, 100);
+}
+QPushButton:pressed{
+background-color: rgb(225, 225, 225, 200);
+}</string>
+      </property>
+      <property name="text">
+       <string>系统</string>
       </property>
      </widget>
     </item>

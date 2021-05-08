@@ -64,6 +64,8 @@ private slots:
 
     void on_radioButton_clicked(bool checked);
 
+    void on_system_btn_clicked();
+
 private:
     Ui::Setting *ui;
 };

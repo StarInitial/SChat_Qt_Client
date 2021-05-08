@@ -9,6 +9,7 @@
 #include "userinfo.h"
 #include <QFileInfo>
 #include <QCloseEvent>
+#include <QPaintEvent>
 #include <QWebChannel>
 #include <QWebSocket>
 #include <QJsonArray>
@@ -56,8 +57,10 @@ private:
     QString avatar;
     QString serverType;
     QString styleColor;
+
 protected:
     void closeEvent(QCloseEvent *event);
+    void paintEvent(QPaintEvent *event);
     void loadStyleColor(QString color);
     //userMessage(messageType.Other,'看见好处就要抢',"雷狮"/*,"../icon/leishi.jpg"*/);
     void systemMessage(QString message);
@@ -67,12 +70,12 @@ protected:
     void addUserToList(QJsonObject json);
     void removeUserByNick(QString nick);
     User getUserByNick(QString nick);
+    void updateUserSizeShow();
 
 private slots:
     void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
     void on_lineEdit_textChanged(const QString &arg1);
     void on_actionempty_triggered();
-    void on_listWidget_itemClicked(QListWidgetItem *item);
 
     void socketConnected();
     void socketDisconnected();
@@ -88,6 +91,10 @@ private slots:
 
     void on_actionreset_triggered();
     void on_actionaccount_triggered();
+
+    void on_enclosure_btn_clicked();
+
+    void on_pushButton_clicked();
 
 private:
     Ui::Session *ui;

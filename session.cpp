@@ -65,14 +65,17 @@ void Session::init(QString server,QString nick,QString avatar,QString room,QStri
 
 
     this->setWindowTitle(tr("SChat") + " | "+ tr("频道:")+room);
-
+    ui->main_title->setText(room);
+    ui->info_widget->hide();
+    ui->tabWidget->tabBar()->close();
     //登陆成功，解析登陆成功信息
     Q_UNUSED(loginMessage);
     if(!loginMessage.isNull()){
         onlineSet(loginMessage);
     }
+    this->updateUserSizeShow();
     on_lineEdit_textChanged("");
-
+    this->resize(900,600);
     loadStyleColor(this->styleColor);
 }
 
@@ -120,6 +123,25 @@ void Session::closeEvent(QCloseEvent *event)
     event->accept();
 }
 
+void Session::paintEvent(QPaintEvent *event)
+{
+    int webDisplayMinWidth = 600;
+
+    //隐藏用户栏
+    if(ui->WebDisplay->width() < webDisplayMinWidth && !ui->user_widget->isHidden()){
+        ui->user_widget->hide();
+    }
+
+    if(ui->WebDisplay->width() < webDisplayMinWidth && !ui->info_widget->isHidden()) {
+        ui->info_widget->hide();
+    }
+
+    if(ui->WebDisplay->width() > (webDisplayMinWidth+ui->user_widget->width()) && ui->user_widget->isHidden()){
+        ui->user_widget->show();
+    }
+    event->accept();
+}
+
 void Session::loadStyleColor(QString color)
 {
     if(color == "default"){
@@ -136,14 +158,14 @@ void Session::loadStyleColor(QString color)
 
     if(color != "63, 188, 242"){
         ui->listWidget->setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba("+color+", 255), stop:1 rgba("+color+", 200));\nborder:0;\ncolor: rgb(255, 255, 255);");
-        ui->lineEdit->setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba("+color+", 255), stop:1 rgba("+color+", 200));\nborder:0;\ncolor: rgb(255, 255, 255);");
+        ui->lineEdit->setStyleSheet("QLineEdit{\nborder-radius: 4px;\nbackground-color: rgb(247, 247, 247);\ncolor: rgb(0, 0, 0);\noutline: none;\nborder: none;\nselection-background-color: rgb("+color+");\n}\nQLineEdit:focus{\nbackground-color: rgb(255, 255, 255);\nborder: 2px solid rgb("+color+");\n}");
     }
     ui->message_edit->setStyleSheet("QLineEdit{\nbackground-color: rgb(255, 255, 255,0);\ncolor: rgb(0, 0, 0);\noutline: none;\nborder: none;\nborder-bottom: 2px solid rgb(100, 100, 100);\nselection-background-color: rgb("+color+");\n}\nQLineEdit:hover{\nborder-bottom: 2px solid rgb(20, 20, 20);\n}\nQLineEdit:focus{\nborder-bottom: 2px solid rgb("+color+");\n}");
 }
 
 void Session::systemMessage(QString message)
 {
-    ui->WebDisplay->page()->runJavaScript("systemMessage('"+message+"')");
+    ui->WebDisplay->page()->runJavaScript("systemMessage("+message+")");
 }
 
 void Session::myMessage(QString message)
@@ -230,6 +252,11 @@ User Session::getUserByNick(QString nick)
     return User();
 }
 
+void Session::updateUserSizeShow()
+{
+    ui->main_label->setText(QString::number(users.size())+" Users");
+}
+
 void Session::userInfoWidget(QString nick)
 {
     UserInfo *info = new UserInfo();
@@ -238,19 +265,15 @@ void Session::userInfoWidget(QString nick)
     info->initUser(user.nick,user.hash,user.id,user.utype);
     info->show();
 }
-void Session::on_listWidget_itemClicked(QListWidgetItem *item)
-{
-    ui->WebDisplay->page()->runJavaScript("atOther('"+item->text()+"')");
-}
 
 void Session::socketConnected()
 {
-    systemMessage("成功与服务器建立连接");
+    systemMessage("unescape('%u6210%u529F%u4E0E%u670D%u52A1%u5668%u5EFA%u7ACB%u8FDE%u63A5')");
 }
 
 void Session::socketDisconnected()
 {
-    systemMessage("丢失与服务器的连接 ...");
+    systemMessage("unescape('%u4E22%u5931%u4E0E%u670D%u52A1%u5668%u7684%u8FDE%u63A5')");
 }
 
 void Session::socketTextMessageReceived(QString message)
@@ -276,7 +299,7 @@ void Session::socketTextMessageReceived(QString message)
         return;
     case 1:
         /*Info*/
-        systemMessage(response["text"].toString());
+        systemMessage("'"+response["text"].toString()+"'");
         return;
     case 2:
         /*OnlineSet*/
@@ -284,12 +307,12 @@ void Session::socketTextMessageReceived(QString message)
         return;
     case 3:
         /*onlineAdd*/
-        systemMessage(tr("用户[")+response["nick"].toString()+tr("]加入了聊天室"));
+        systemMessage(tr("'用户[")+response["nick"].toString()+tr("]加入了聊天室'"));
         addUserToList(response);
         return;
     case 4:
         /*onlineRemove*/
-        systemMessage(tr("用户[")+response["nick"].toString()+tr("]离开了聊天室"));
+        systemMessage(tr("'用户[")+response["nick"].toString()+tr("]离开了聊天室'"));
         removeUserByNick(response["nick"].toString());
         return;
     default:
@@ -380,5 +403,29 @@ void Session::on_actionaccount_triggered()
     if(serverType=="hack.chat"){
         QMessageBox::information(this,"Information","Hack.Chat Server no account control function.");
         return;
+    }
+}
+
+void Session::on_enclosure_btn_clicked()
+{
+    if(serverType=="hack.chat"){
+        QMessageBox::information(this,"Information","Hack.Chat Server no Document service function.");
+        return;
+    }
+}
+
+void Session::on_pushButton_clicked()
+{
+//    if(serverType=="hack.chat"){
+//        QMessageBox::information(this,"Information","Hack.Chat Server no Stickers service function.");
+//        return;
+//    }
+
+    if(ui->info_widget->isHidden()){
+        this->resize(this->width()+ui->info_widget->width(),this->height());
+        ui->info_widget->show();
+    }else{
+        ui->info_widget->hide();
+        this->resize(this->width()-ui->info_widget->width(),this->height());
     }
 }
