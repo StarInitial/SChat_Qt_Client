@@ -66,6 +66,11 @@ void Setting::backUpdate()
     if(w_type == "join"){
         ((Join *)w)->initConfigFile();
         ((Join *)w)->loadStyleColor();
+    }else if(w_type == "session") {
+        if(server_change){
+            QMessageBox::warning(this,"Warning","Your server config has been changed..\nYou need login again..");
+            w->close();
+        }
     }
 }
 

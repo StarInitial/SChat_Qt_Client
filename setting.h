@@ -26,6 +26,7 @@ public:
 private:
     QWidget *w;
     QString w_type;
+    bool server_change = false;
     int inSize(int size,int min,int max,int defaultSize);
     void backUpdate();
     void loadStyleColor(int r,int g,int b);

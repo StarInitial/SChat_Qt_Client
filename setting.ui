@@ -110,7 +110,7 @@ background-color: rgb(225, 225, 225, 200);
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideNone</enum>
@@ -778,7 +778,7 @@ background-color: rgb(255, 255, 255);</string>
       <rect>
        <x>20</x>
        <y>350</y>
-       <width>571</width>
+       <width>271</width>
        <height>41</height>
       </rect>
      </property>
@@ -808,6 +808,54 @@ border-bottom: 2px solid rgb(63, 188, 242);
      </property>
      <property name="currentText">
       <string>微软雅黑</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_20">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>310</y>
+       <width>120</width>
+       <height>33</height>
+      </rect>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>120</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft JhengHei</family>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>头像：</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="avator">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
+       <y>320</y>
+       <width>100</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>100</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border-radius: 50px;
+background-color: rgb(63, 188, 242);</string>
+     </property>
+     <property name="text">
+      <string/>
      </property>
     </widget>
    </widget>

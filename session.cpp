@@ -44,15 +44,21 @@ void Session::file()
 
 void Session::init(QString server,QString nick,QString avatar,QString room,QString styleColor,QString serverType,QString loginMessage)
 {
-    this->server = server;
-    if(nick.contains("#")){
-        this->nick = nick.mid(0,nick.indexOf("#"));
-        qDebug()<<this->nick;
-    }else {
-        this->nick = nick;
+    if(!server.isNull()) {
+        this->server = server;
+    }
+    if(!nick.isNull()) {
+        if(nick.contains("#")){
+            this->nick = nick.mid(0,nick.indexOf("#"));
+            qDebug()<<this->nick;
+        }else {
+            this->nick = nick;
+        }
     }
     this->avatar = avatar;
-    this->room = room;
+    if(!room.isNull()){
+        this->room = room;
+    }
 
     this->styleColor = styleColor;
     this->serverType = serverType;
@@ -62,7 +68,9 @@ void Session::init(QString server,QString nick,QString avatar,QString room,QStri
 
     //登陆成功，解析登陆成功信息
     Q_UNUSED(loginMessage);
-    onlineSet(loginMessage);
+    if(!loginMessage.isNull()){
+        onlineSet(loginMessage);
+    }
     on_lineEdit_textChanged("");
 
     loadStyleColor(this->styleColor);
