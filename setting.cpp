@@ -1,6 +1,8 @@
 #include "setting.h"
 #include "ui_setting.h"
 #include "about.h"
+#include "join.h"
+#include "session.h"
 
 #include "QDebug"
 
@@ -9,6 +11,7 @@ Setting::Setting(QWidget *parent) :
     ui(new Ui::Setting)
 {
     ui->setupUi(this);
+    this->setWindowModality(Qt::ApplicationModal);
     this->initUI();
     setPage(0);
 }
@@ -25,6 +28,7 @@ void Setting::setPage(int page)
 
 void Setting::on_ok_clicked()
 {
+    backUpdate();
 }
 
 void Setting::clearColor()
@@ -43,12 +47,26 @@ void Setting::initUI()
     ui->auth_widget_2->hide();
 }
 
+void Setting::initParentWidget(QWidget *w, QString type)
+{
+    this->w_type = type;
+    this->w = w;
+}
+
 int Setting::inSize(int size, int min, int max, int defaultSize)
 {
     if(size >= min && size <= max) {
         return size;
     }
     return defaultSize;
+}
+
+void Setting::backUpdate()
+{
+    if(w_type == "join"){
+        ((Join *)w)->initConfigFile();
+        ((Join *)w)->loadStyleColor();
+    }
 }
 
 void Setting::loadStyleColor(int r, int g, int b)
@@ -94,6 +112,7 @@ void Setting::loadStyleColor(int r, int g, int b)
     ui->server_auth_key->setStyleSheet(style_input_line.replace(style_clor_name,colorRgbName));
     ui->password->setStyleSheet(style_input_line.replace(style_clor_name,colorRgbName));
     ui->style_file_path->setStyleSheet(style_input_line.replace(style_clor_name,colorRgbName));
+    ui->server_url->setStyleSheet(style_input_line.replace(style_clor_name,colorRgbName));
     ui->spinBox->setStyleSheet("QSpinBox{\nbackground-color: rgb(255, 255, 255,0);\n	color: rgb(0, 0, 0);\noutline: none;\nborder: none;\nborder-bottom: 2px solid rgb(100, 100, 100);\nselection-background-color: "+colorRgbName+"\n}\nQSpinBox:hover{\nborder-bottom: 2px solid rgb(20, 20, 20);\n}\nQSpinBox:focus{\nborder-bottom: 2px solid "+colorRgbName+"\n}");
 
     //选择框调整

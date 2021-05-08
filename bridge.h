@@ -16,8 +16,7 @@ signals:
 public slots:
     void alert(QString session,int type);
     void init();
-    void file();
-    void saveHistory(QString history);
+    void at(QString nick,QString msg);
     void chatApis(int command,QString data);
 };
 

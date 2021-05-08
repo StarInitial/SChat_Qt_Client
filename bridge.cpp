@@ -28,21 +28,9 @@ void bridge::init()
     ((Session*)parent)->initWeb();
 }
 
-//附件
-void bridge::file()
+void bridge::at(QString nick, QString msg)
 {
-    if(parent == nullptr) return;
-    ((Session*)parent)->file();
-}
-
-void bridge::saveHistory(QString history)
-{
-    if(parent == nullptr) {
-        QMessageBox::critical(nullptr,tr("错误"),tr("调用错误 [聊天记录] 存储失败"));
-        return;
-    }
-    qDebug()<<history;
-    Q_UNUSED(history);
+    ((Session*)parent)->at(nick,msg);
 }
 
 void bridge::chatApis(int command, QString data)
@@ -51,13 +39,13 @@ void bridge::chatApis(int command, QString data)
      * SChat Web->Qt API
      * Now Command Well be notes here;
      * command -> means
-     * <-1-> -> Send Message
+     * <-1-> -> userInfoWidget
      *
      * <-default-> -> Api Call Error
      */
     switch (command) {
-    case 1:
-        ((Session*)parent)->sendMessage(data);
+    case 1 :
+        ((Session*)parent)->userInfoWidget(data);
         return;
     default:
         QMessageBox::critical(nullptr,tr("错误"),tr("API调用错误:\n[")+QString::number(command)+tr("]不是预定义的指令索引"));

@@ -4,6 +4,10 @@
         <file alias="schat">schat.ico</file>
         <file alias="schat_back">SChat_back.png</file>
         <file alias="color_check_in">img/icon/color_check_in.png</file>
+        <file alias="send_btn">img/icon/send_btn.png</file>
+        <file alias="emoji_btn">img/icon/emoji_btn.png</file>
+        <file alias="enclosure_btn">img/icon/enclosure_btn.png</file>
+        <file alias="set_btn">img/icon/set_btn.png</file>
     </qresource>
     <qresource prefix="/title">
         <file alias="setting_title">img/title/setting_title.png</file>

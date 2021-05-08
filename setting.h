@@ -20,10 +20,14 @@ public:
     void clearColor();
 
     void initUI();
+    void initParentWidget(QWidget *w,QString type);
 
 
 private:
+    QWidget *w;
+    QString w_type;
     int inSize(int size,int min,int max,int defaultSize);
+    void backUpdate();
     void loadStyleColor(int r,int g,int b);
 
 private slots:

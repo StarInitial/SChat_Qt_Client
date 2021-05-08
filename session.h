@@ -42,8 +42,10 @@ public:
     ~Session();
 
     void file();
-    void init(QString server,QString nick,QString avatar,QString room,QString loginMessage);
+    void init(QString server,QString nick,QString avatar,QString room,QString styleColor,QString serverType,QString loginMessage);
     QList<User> users;
+    void at(QString nick,QString msg);
+    void userInfoWidget(QString nick);
 public slots:
     void initWeb();
     void sendMessage(QString message);
@@ -52,9 +54,11 @@ private:
     QString server;
     QString nick;
     QString avatar;
+    QString serverType;
+    QString styleColor;
 protected:
     void closeEvent(QCloseEvent *event);
-
+    void loadStyleColor(QString color);
     //userMessage(messageType.Other,'看见好处就要抢',"雷狮"/*,"../icon/leishi.jpg"*/);
     void systemMessage(QString message);
     void myMessage(QString message);
@@ -75,6 +79,15 @@ private slots:
     void socketTextMessageReceived(QString message);
 
     void on_actionabout_triggered();
+
+    void on_send_btn_clicked();
+
+    void on_message_edit_returnPressed();
+
+    void on_actionsystem_triggered();
+
+    void on_actionreset_triggered();
+    void on_actionaccount_triggered();
 
 private:
     Ui::Session *ui;

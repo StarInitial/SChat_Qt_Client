@@ -1,5 +1,6 @@
 #include "session.h"
 #include "ui_session.h"
+#include "setting.h"
 
 #include <QDebug>
 
@@ -41,7 +42,7 @@ void Session::file()
     ui->WebDisplay->page()->runJavaScript("newMessage(unescape('%5B%u6587%u4EF6%u4F20%u8F93%5D%20%u529F%u80FD%u5DF2%u9501%u5B9A'),0)");
 }
 
-void Session::init(QString server, QString nick, QString avatar,QString room,QString loginMessage)
+void Session::init(QString server,QString nick,QString avatar,QString room,QString styleColor,QString serverType,QString loginMessage)
 {
     this->server = server;
     if(nick.contains("#")){
@@ -53,21 +54,39 @@ void Session::init(QString server, QString nick, QString avatar,QString room,QSt
     this->avatar = avatar;
     this->room = room;
 
+    this->styleColor = styleColor;
+    this->serverType = serverType;
+
+
     this->setWindowTitle(tr("SChat") + " | "+ tr("频道:")+room);
 
     //登陆成功，解析登陆成功信息
     Q_UNUSED(loginMessage);
     onlineSet(loginMessage);
     on_lineEdit_textChanged("");
+
+    loadStyleColor(this->styleColor);
+}
+
+void Session::at(QString nick, QString msg)
+{
+    Q_UNUSED(msg);
+    QString message = ui->message_edit->text();
+    if(message.contains("@"+nick)){
+        return;
+    }
+    ui->message_edit->setText("@"+nick+" "+message);
 }
 
 void Session::initWeb()
 {
     if(avatar.isNull() || avatar.isEmpty()) {
-        ui->WebDisplay->page()->runJavaScript("init('"+server+"','"+nick+"')");
+        ui->WebDisplay->page()->runJavaScript("init('"+server+"','"+nick+"','"+this->serverType+"','"+this->styleColor+"',\"14\",\"sans\")");
     }else {
-        ui->WebDisplay->page()->runJavaScript("init('"+server+"','"+nick+"','"+avatar+"')");
+        ui->WebDisplay->page()->runJavaScript("init('"+server+"','"+nick+"','"+this->serverType+"','"+this->styleColor+"','"+avatar+"')");
     }
+
+    ui->WebDisplay->page()->runJavaScript("systemDate()");
 
 //    ui->WebDisplay->page()->runJavaScript("userMessage(messageType.Other,unescape('%u770B%u89C1%u597D%u5904%u5C31%u8981%u62A2'),unescape('%u96F7%u72EE'),'../icon/leishi.jpg');");
 //    QString user = "雷狮";
@@ -83,6 +102,7 @@ void Session::sendMessage(QString message)
     QJsonDocument jsonDoc;
     jsonDoc.setObject(*sendmessage);
     socket->sendTextMessage(jsonDoc.toJson());
+
 }
 
 void Session::closeEvent(QCloseEvent *event)
@@ -92,6 +112,27 @@ void Session::closeEvent(QCloseEvent *event)
     event->accept();
 }
 
+void Session::loadStyleColor(QString color)
+{
+    if(color == "default"){
+        color = "63, 188, 242";
+    }else if (color == "darkblue") {
+        color = "0, 85, 127";
+    }else if (color == "black") {
+        color = "0, 0, 0";
+    }else if (color == "pink") {
+        color = "251, 114, 153";
+    }else {
+        return;
+    }
+
+    if(color != "63, 188, 242"){
+        ui->listWidget->setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba("+color+", 255), stop:1 rgba("+color+", 200));\nborder:0;\ncolor: rgb(255, 255, 255);");
+        ui->lineEdit->setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba("+color+", 255), stop:1 rgba("+color+", 200));\nborder:0;\ncolor: rgb(255, 255, 255);");
+    }
+    ui->message_edit->setStyleSheet("QLineEdit{\nbackground-color: rgb(255, 255, 255,0);\ncolor: rgb(0, 0, 0);\noutline: none;\nborder: none;\nborder-bottom: 2px solid rgb(100, 100, 100);\nselection-background-color: rgb("+color+");\n}\nQLineEdit:hover{\nborder-bottom: 2px solid rgb(20, 20, 20);\n}\nQLineEdit:focus{\nborder-bottom: 2px solid rgb("+color+");\n}");
+}
+
 void Session::systemMessage(QString message)
 {
     ui->WebDisplay->page()->runJavaScript("systemMessage('"+message+"')");
@@ -99,7 +140,7 @@ void Session::systemMessage(QString message)
 
 void Session::myMessage(QString message)
 {
-    QString js = "userMessage(1,'"+message+"','"+nick+"'";
+    QString js = "userMessage(1,\""+message.replace("\"","&quot;")+"\",'"+nick+"'";
     if(!avatar.isNull() && !avatar.isEmpty()){
         js += ",'../icon/"+avatar+"'";
     }
@@ -109,7 +150,7 @@ void Session::myMessage(QString message)
 
 void Session::otherMessage(QString message, QString otherNick, QString otherAvatar)
 {
-    QString js = "userMessage(2,'"+message+"','"+otherNick+"'";
+    QString js = "userMessage(2,'"+message.replace("\"","&quot;")+"','"+otherNick+"'";
     if(!otherAvatar.isNull() && !otherAvatar.isEmpty()){
         js += ",'../icon/"+otherAvatar+"'";
     }
@@ -133,7 +174,7 @@ void Session::onlineSet(QString json)
        QJsonObject user = userRef.toObject();
        qDebug()<<user;
        User *thisUser = new User();
-       thisUser->id = QString::number(user.take("userid").toDouble());
+       thisUser->id = QString::number(user.take("userid").toDouble(),'f',0);
        thisUser->nick = user["nick"].toString();
        thisUser->trip = user["trip"].toString();
        thisUser->utype = user["utype"].toString();
@@ -180,6 +221,15 @@ User Session::getUserByNick(QString nick)
     }
     return User();
 }
+
+void Session::userInfoWidget(QString nick)
+{
+    UserInfo *info = new UserInfo();
+    User user = getUserByNick(nick);
+    info->init(avatar,server,room,users.size());
+    info->initUser(user.nick,user.hash,user.id,user.utype);
+    info->show();
+}
 void Session::on_listWidget_itemClicked(QListWidgetItem *item)
 {
     ui->WebDisplay->page()->runJavaScript("atOther('"+item->text()+"')");
@@ -192,7 +242,7 @@ void Session::socketConnected()
 
 void Session::socketDisconnected()
 {
-    systemMessage("丢失与服务器的连接...");
+    systemMessage("丢失与服务器的连接 ...");
 }
 
 void Session::socketTextMessageReceived(QString message)
@@ -244,13 +294,7 @@ void Session::socketTextMessageReceived(QString message)
 void Session::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 {
     //** 将被设计为双击打开个人详情页 **//
-    UserInfo *info = new UserInfo();
-    info->init(avatar,server,room,users.length());
-    qDebug()<<"room"<<room<<"server"<<server;
-    User user = getUserByNick(item->text());
-    qDebug()<<user.id;
-    info->initUser(user.nick,user.hash,user.id,user.utype);
-    info->show();
+    userInfoWidget(item->text());
 }
 
 void Session::on_lineEdit_textChanged(const QString &arg1)
@@ -260,8 +304,14 @@ void Session::on_lineEdit_textChanged(const QString &arg1)
         if(user.nick.contains(arg1)){
             QListWidgetItem *item = new QListWidgetItem();
             item->setText(user.nick);
-            if(user.icon != NULL) {
-                item->setIcon(QIcon(user.icon));
+            if(user.nick == this->nick){
+                if(this->avatar.isEmpty()){
+                    item->setIcon(QIcon(":/ico/unknown"));
+                }else {
+                    item->setIcon(QIcon("./icon/"+this->avatar));
+                }
+            }else if(user.icon != NULL) {
+                item->setIcon(QIcon("./icon/"+user.icon));
             }else {
                 item->setIcon(QIcon(":/ico/unknown"));
             }
@@ -286,4 +336,41 @@ void Session::on_actionabout_triggered()
     //阻塞其他页面，防止多个关于界面
     h->setWindowModality(Qt::ApplicationModal);
     h->show();
+}
+
+void Session::on_send_btn_clicked()
+{
+    QString message = ui->message_edit->text();
+    if(message.isEmpty()) {
+        return;
+    }
+    sendMessage(message);
+
+    ui->message_edit->clear();
+}
+
+void Session::on_message_edit_returnPressed()
+{
+    on_send_btn_clicked();
+}
+
+void Session::on_actionsystem_triggered()
+{
+    Setting *s = new Setting();
+    s->show();
+}
+
+void Session::on_actionreset_triggered()
+{
+    Join *j = new Join();
+    this->close();
+    j->show();
+}
+
+void Session::on_actionaccount_triggered()
+{
+    if(serverType=="hack.chat"){
+        QMessageBox::information(this,"Information","Hack.Chat Server no account control function.");
+        return;
+    }
 }
